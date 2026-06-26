@@ -8,22 +8,23 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { toast } from "react-toastify";
+import { useRazorpay } from "react-razorpay";
 
 const Cart = () => {
 
   const [cartItems, setCartItems] = useState([])
   const navigator = useNavigate();
 
-  async function addToCart(productId, quantity){
+  async function addToCart(productId, quantity) {
     try {
       // alert(productId+" "+quantity)
       // return;
       let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/cart`, {
         method: "POST",
-        credentials:"include",
+        credentials: "include",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ productId, quantity }),
-        
+
       });
 
       if (!response.ok)
@@ -32,7 +33,7 @@ const Cart = () => {
       response = await response.json();
       console.log(response.cart);
       setCartItems(response.cart);
-      
+
     } catch (error) {
       console.log(error);
       toast.error("Could not fetch cart at the moment!!", { position: "bottom-center" });
@@ -40,12 +41,12 @@ const Cart = () => {
     }
   }
 
-  const increaseQty =  (productId, quantity) => {
+  const increaseQty = (productId, quantity) => {
     addToCart(productId, quantity)
   }
-  
+
   const decreaseQty = (productId, quantity) => {
-      addToCart(productId, quantity )
+    addToCart(productId, quantity)
   }
 
   const removeItem = (productId, quantity) => {
@@ -64,7 +65,7 @@ const Cart = () => {
 
   //   );
   //   addToCart(id)
-  
+
   // };
 
 
@@ -103,6 +104,34 @@ const Cart = () => {
 
 
 
+  // Payment ----------------
+
+  const {Razorpay}=useRazorpay();
+
+
+  async function handlePayment() {
+    try {
+      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/order");
+      if (!response.ok)
+        return toast("Could not proceed at the moment!", { position: "bottom-center" });
+
+      response = await response.json();
+      const orderObj = response.message;
+      const rzpay = new Razorpay({
+        key: import.meta.env.VITE_RAZ_KEY,
+        order_id: orderObj.id,
+        amount: orderObj.amount,
+        currency: orderObj.currency
+      });
+
+      rzpay.open();
+
+    } catch (error) {
+      console.log(error)
+      toast("Could not proceed at the moment!", { position: "bottom-center" });
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#f5f5f5] py-10 px-4">
       <div className="max-w-7xl mx-auto">
@@ -126,7 +155,7 @@ const Cart = () => {
               Looks like you haven’t added anything yet.
             </p>
 
-            <button onClick={()=>navigator("/shop")} className="bg-[#7fad39] hover:bg-[#6f9d32] transition text-white px-8 py-4 rounded-2xl font-semibold">
+            <button onClick={() => navigator("/shop")} className="bg-[#7fad39] hover:bg-[#6f9d32] transition text-white px-8 py-4 rounded-2xl font-semibold">
               Continue Shopping
             </button>
           </div>
@@ -145,9 +174,9 @@ const Cart = () => {
                   {/* IMAGE */}
                   <div className="w-full md:w-40 h-40 rounded-2xl overflow-hidden">
                     <img
-                      src={import.meta.env.VITE_BACKEND_HOST+"/image/images/"+item.image}
+                      src={import.meta.env.VITE_BACKEND_HOST + "/image/images/" + item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover              "
                     />
                   </div>
 
@@ -269,14 +298,14 @@ const Cart = () => {
                 </div>
 
                 {/* Checkout */}
-                <button className="w-full mt-8 bg-[#7fad39] hover:bg-[#6f9d32] transition text-white py-5 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
+                <button onClick={handlePayment} className="w-full mt-8 bg-[#7fad39] hover:bg-[#6f9d32] transition text-white py-5 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
                   Proceed To Checkout
                   <ArrowRight size={20} />
                 </button>
 
                 {/* Continue Shopping */}
-                <button onClick = {() => navigator("/shop")}
-                 className="w-full mt-4 border border-gray-300 hover:bg-gray-100 transition py-5 rounded-2xl font-semibold text-gray-700">
+                <button onClick={() => navigator("/shop")}
+                  className="w-full mt-4 border border-gray-300 hover:bg-gray-100 transition py-5 rounded-2xl font-semibold text-gray-700">
                   Continue Shopping
                 </button>
               </div>
