@@ -1,0 +1,26 @@
+// import { useRazorpay } from "react-razorpay";
+//   const {Razorpay}=useRazorpay();
+
+
+//   async function handlePayment() {
+//     try {
+//       let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/orders");
+//       if (!response.ok)
+//         return toast("Could not proceed at the moment!", { position: "bottom-center" });
+
+//       response = await response.json();
+//       const orderObj = response.message;
+//       const rzpay = new Razorpay({
+//         key: import.meta.env.VITE_RAZ_KEY,
+//         order_id: orderObj.id,
+//         amount: orderObj.amount,
+//         currency: orderObj.currency
+//       });
+
+//       rzpay.open();
+
+//     } catch (error) {
+//       console.log(error)
+//       toast("Could not proceed at the moment!", { position: "bottom-center" });
+//     }
+//   }
