@@ -221,6 +221,98 @@ return(
     ))}
 )
 
+----------------------------------------------------------------------------------------
+<!-- function PriceRangeSlider({values, setValues, priceRange}) {
+
+const [values, setValues] = useState([0, 100]);
+const [priceRange, setPriceRange] = useState({min: 0, max: 0});
+
+  return (
+    <>
+    <Range
+      label="Select your value"
+      step={1}
+      min={0}
+      max={100}
+      values={values}
+      onChange={(values) => setValues(values)}
+      renderTrack={({ props, children }) => (
+        <div
+          {...props}
+          style={{
+            ...props.style,
+            height: "5px",
+            width: "100%",
+            backgroundImage: `linear-gradient(to right ,#e3dede 0%, #e3dede ${values[0]}%, red ${values[0]}%, red ${values[1]}%, #e3dede ${values[1]}% )`
+          }}
+        >
+          {children}
+        </div>
+      )}
+      renderThumb={({ props }) => (
+        <div
+          {...props}
+          key={props.key}
+          style={{
+            ...props.style,
+            height: "20px",
+            width: "20px",
+            borderRadius: "50%",
+            backgroundColor: "red",
+          }}
+        />
+      )}
+      
+    />
+    <p className="py-2">Price: {priceRange.min}- {priceRange.max}</p>
+    </>
+  ); 
+} -->
+
+<!--    const [values, setValues] = useState([0, 100]);
+   const [priceRange, setPriceRange] = useState({min: 0, max: 0});
+
+  useEffect(()=>{
+    
+  const min = Math.min(...products.map(product=>product.price));
+  const max = Math.max(...products.map(product=>product.price));
+  const range = max-min;
+  setPriceRange({
+    min: range*values[0]/100+min,
+    max: range*values[1]/100+min
+  });
+
+  }, [values, products]) // to avoid lag in function when page reloads
+
+  useEffect(()=>{
+    setValues([0, 100]);
+  }, [products]) -->
+
+  <!-- products.filter(el=>el.price>=priceRange.min && el.price<=priceRange.max) -->
+
+  ---------------------------------------------------
+
+    handler: async (payment_obj)=>{
+              try {
+                let res = await fetch(import.meta.env.VITE_BACKEND_HOST+"/verifypayment", {
+                  method: "POST",
+                  headers: {"content-type": "application/json"},
+                  credentials: "include",
+                  body: JSON.stringify(payment_obj)
+                });
+
+                if(!res.ok)
+                  return toast("Something went wrong! If you are sure that the said amount has been deducted, please contact us!", {position: "bottom-center"});
+                
+
+                toast("Thank you for shopping with us!!!", {position: "bottom-center"});
+
+              } catch (error) {
+                toast("Something went wrong! If you are sure that the said amount has been deducted, please contact us!", {position: "bottom-center"});
+                
+              }
+          }
+
 
 
 

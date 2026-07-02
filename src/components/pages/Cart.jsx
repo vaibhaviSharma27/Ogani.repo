@@ -102,6 +102,7 @@ const Cart = () => {
   }
 
   useEffect(() => { fetchCart() }, []);
+  
 
 
 
@@ -124,11 +125,34 @@ const Cart = () => {
 
     response = await response.json();
     const orderObj = response;
+    console.log(response);
           const rzpay = new Razorpay({
           key: import.meta.env.VITE_RAZ_KEY,
-          order_id: orderObj.id,
+          order_id: orderObj.orderId,
           amount: orderObj.amount,
-          currency: orderObj.currency
+          currency: orderObj.currency,
+
+          handler: async (payment_obj) => {
+            try{
+              let res = await fetch(import.meta.env.VITE_BACKEND_HOST+"/verifypayment",{
+                method:"POST",
+                headers:{"content-type":"application/json"},
+                credentials:"include",
+                body:JSON.stringify(payment_obj)
+              });
+
+              if(!res.ok)
+                return toast.error("Something went wrong!! If you are sure that the said amount has been deducted, please contact us!!", {position:"bottom-center"});
+
+            toast.success("Thank you for shopping with us!!!", {position:"bottom-center"});
+
+            }catch(error){
+
+              toast.error("Something went wrong!! If you are sure that the said amount has been deducted, please contact us!!", {position:"bottom-center"});
+
+            }
+          }
+      
         });
 
         rzpay.open();
@@ -271,7 +295,7 @@ const Cart = () => {
             {/* RIGHT SIDE */}
             <div>
               <div className="bg-white rounded-3xl p-8 shadow-sm sticky top-10">
-
+ 
                 <h2 className="text-3xl font-bold text-gray-800 mb-8">
                   Cart Summary
                 </h2>
