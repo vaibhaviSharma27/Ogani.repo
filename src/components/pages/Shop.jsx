@@ -241,9 +241,9 @@ function Product({item}) {
       <p className="font-semibold">{item.title} </p>
       
       <p>
-        <strong>INR {item.price}</strong>{" "}
+        <strong>INR {(item.price).toFixed(0)}</strong>{" "}
         
-        <del className="text-gray-400"> INR{Number(item.price/80*100).toFixed(2)}</del>
+        <del className="text-gray-400"> INR{Number(item.price/80*100).toFixed(0)}</del>
 
       </p>
     </div>
