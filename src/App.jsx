@@ -10,6 +10,8 @@ import Contact from "./components/pages/Contact"
 import Cart from "./components/pages/Cart"
 import Shop from "./components/pages/Shop"
 import Wishlist from "./components/pages/Wishlist"
+import Orders from "./components/pages/Orders"
+
 export default function App() {
     const routes = createBrowserRouter([
         {
@@ -21,7 +23,8 @@ export default function App() {
                 { path: "/contact", element: <Contact /> },
                 { path: "/cart", element: <Cart /> },
                 {path: "/shop", element: <Shop />},
-                {path:"/wishlist", element: <Wishlist />}
+                {path:"/wishlist", element: <Wishlist />},
+                {path:"/orders", element: <Orders />}
             ]
         },
         { path: "/login", element: <Login /> },

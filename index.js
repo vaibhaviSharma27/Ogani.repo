@@ -542,8 +542,8 @@ console.log(Math.max(...products.map(product=>product.price)));
 /*
  
     diff = max-min
-    (diff*0/100)+min = 0+10;
-    diff*100/100 = diff;
+    (diff*0/100)+ min = 0+min = min;
+    (diff*100/100)+ min = diff+ min = max;
 
 
 

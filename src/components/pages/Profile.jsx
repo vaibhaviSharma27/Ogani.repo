@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Profile = () => {
   const navigator = useNavigate();
@@ -157,10 +158,13 @@ const Profile = () => {
               My Profile
             </button>
 
-            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 transition text-gray-700">
+
+            <button onClick = {() => {navigator("/orders")}} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 transition text-gray-700">
               <ShoppingBag size={18} />
               My Orders
+            
             </button>
+
 
             <button onClick = {() => {navigator("/wishlist")}}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 transition text-gray-700">
