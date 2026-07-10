@@ -6,7 +6,8 @@ import { CiMenuBurger } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-export default function Nav() {
+export default function Nav({loggedInStatus}) {
+    console.log(loggedInStatus, "loggedInStatus");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const mobileMenuRef = useRef(null);
     return (
@@ -45,7 +46,7 @@ export default function Nav() {
                         </ul>
                     </div> */}
 
-                   <Link to="/login"> <button className="flex items-center gap-2"><MdPerson /> Login</button></Link>
+                 {loggedInStatus==false && <Link to="/login"> <button className="flex items-center gap-2"><MdPerson /> Login</button></Link>}
 
                 </div>
 
@@ -65,7 +66,7 @@ export default function Nav() {
                             }}><IoIosClose size={36} /></li>
                             <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/"><li className="hover:bg-gray-100 cursor-pointer" >HOME</li></NavLink>
                             <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/shop"><li className="hover:bg-gray-100 cursor-pointer">SHOP</li></NavLink>
-                            <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/profile"><li className="hover:bg-gray-100 cursor-pointer">PROFILE</li></NavLink>
+                            {loggedInStatus == true && <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/profile"><li className="hover:bg-gray-100 cursor-pointer">PROFILE</li></NavLink>}
                             <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/contact"><li className="hover:bg-gray-100 cursor-pointer">CONTACT</li></NavLink>
                             <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/login"><li className="hover:bg-gray-100 cursor-pointer">LOGIN</li></NavLink>
                         </ul>
@@ -78,11 +79,11 @@ export default function Nav() {
                 <div className="hidden lg:flex gap-12 font-bold text-[14px] ml-10  " style={{ letterSpacing: "2px" }}>
                     <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/"><button className="" >HOME</button></NavLink>
                     <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/shop"><button>SHOP</button></NavLink>
-                    <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/profile"><button>PROFILE</button></NavLink>
+                    {loggedInStatus == true && <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/profile"><button>PROFILE</button></NavLink>}
                     <NavLink className={({isActive})=>`${isActive && "text-[#7fad39]"}`} to="/contact"><button>CONTACT</button></NavLink>
                 </div>
 
-                <div className="flex items-center gap-6">
+                {loggedInStatus==true && <div className="flex items-center gap-6">
                     <Link to="/wishlist">
                     <div className="flex relative">
                         <FaHeart size={19} />
@@ -99,7 +100,7 @@ export default function Nav() {
 
                     {/* <p>Item: <strong>$150.00</strong></p> */}
 
-                </div>
+                </div>}
             </nav>
 
         </div>

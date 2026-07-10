@@ -3,7 +3,7 @@ import { Mail, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const Login = ({setLoggedinStatus}) => {
 
     const navigator = useNavigate();
 
@@ -20,6 +20,7 @@ const Login = () => {
                 return toast.error("Invalid Credentials!", {position: "bottom-center"});
 
             toast.success("Logged in!", {position: "bottom-center"});
+            setLoggedinStatus(true);
             navigator("/profile");
 
         } catch (error) {
