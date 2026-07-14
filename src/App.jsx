@@ -15,7 +15,7 @@ import Protect from "./components/Protect"
 import Redirect from "./components/Redirect"
 
 
-import { Navigate} from "react-router-dom";
+import { Navigate, Outlet} from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export default function App() {
