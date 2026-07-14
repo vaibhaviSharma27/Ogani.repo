@@ -50,7 +50,7 @@ export default function App() {
     
     //     }, []);
 
-    const [loggedStatusLoading, setLoginStatusLoading] = useState(true);
+    const [loginStatusLoading, setLoginStatusLoading] = useState(true);
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(()=>{
