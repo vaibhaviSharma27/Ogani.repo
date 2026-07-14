@@ -22,33 +22,55 @@ export default function App() {
 
 
 
-     const [loginStatusLoading, setLoginStatusLoading] = useState(true);
-        const [loggedIn, setLoggedIn] = useState(false);
+    //  const [loginStatusLoading, setLoginStatusLoading] = useState(true);
+    //     const [loggedIn, setLoggedIn] = useState(false);
     
     
-        useEffect(() => {
+    //     useEffect(() => {
     
-            (
-                async () => {
-                    try {
-                        let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/profile`, { credentials: "include" });
-                        if (!response.ok)
-                            throw new Error("User not logged in");
+    //         (
+    //             async () => {
+    //                 try {
+    //                     let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/profile`, { credentials: "include" });
+    //                     if (!response.ok)
+    //                         throw new Error("User not logged in");
     
-                        setLoggedIn(true);
+    //                     setLoggedIn(true);
     
     
-                    } catch (error) {
-                        setLoggedIn(false);
-                    } finally {
-                        setLoginStatusLoading(false);
-                    }
+    //                 } catch (error) {
+    //                     setLoggedIn(false);
+    //                 } finally {
+    //                     setLoginStatusLoading(false);
+    //                 }
+    //             }
+    
+    //         )()
+    
+    
+    //     }, []);
+
+    const [loggedStatusLoading, setLoginStatusLoading] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(()=>{
+        (
+            async () => {
+                try{
+                    let response = await fetch (`${import.meta.env.VITE_BACKEND_HOST}/profile`, {credentials:"include"});
+                    if(!response.ok)
+                        throw new Error("User not logged in!!");
+                    
+                    setLoggedIn(true);
+                    
+                }catch(error){
+                    setLoggedIn(false);
+                }finally{
+                    setLoginStatusLoading(false);
                 }
-    
-            )()
-    
-    
-        }, [])
+            }
+        )()
+    }, []);
     
 
     const routes = createBrowserRouter([

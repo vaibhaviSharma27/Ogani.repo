@@ -6,6 +6,7 @@ import { CiMenuBurger } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+
 export default function Nav({loggedInStatus}) {
     console.log(loggedInStatus, "loggedInStatus");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,8 +46,9 @@ export default function Nav({loggedInStatus}) {
 
                         </ul>
                     </div> */}
-
-                 {loggedInStatus==false && <Link to="/login"> <button className="flex items-center gap-2"><MdPerson /> Login</button></Link>}
+{/* 
+                 {loggedInStatus==false && } */}
+                { loggedInStatus == false && <Link to="/login"><button className="flex items-center gap-2"><MdPerson /> Login</button></Link>}
 
                 </div>
 
@@ -101,6 +103,7 @@ export default function Nav({loggedInStatus}) {
                     {/* <p>Item: <strong>$150.00</strong></p> */}
 
                 </div>}
+
             </nav>
 
         </div>
