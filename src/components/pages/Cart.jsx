@@ -20,7 +20,7 @@ const Cart = () => {
     try {
       // alert(productId+" "+quantity)
       // return;
-      let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/cart`, {
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/userItems/cart`, {
         method: "POST",
         credentials: "include",
         headers: { "content-type": "application/json" },

@@ -27,7 +27,7 @@ export default function Shop() {
     try {
       if(searchTerm!="")
           setSelectedCategory("");
-      console.log(`${import.meta.env.VITE_BACKEND_HOST}/products?q=${searchTerm}&category=${category}`)
+      console.log(`${import.meta.env.VITE_BACKEND_HOST}/shop/products?q=${searchTerm}&category=${category}`)
       let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/products?q=${searchTerm}&category=${category}`);
 
       if(!response.ok)

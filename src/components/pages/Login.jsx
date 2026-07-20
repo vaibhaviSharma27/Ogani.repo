@@ -9,7 +9,7 @@ const Login = ({setLoggedinStatus}) => {
 
    async function loginHandler(data){
         try {
-            let response = await fetch(import.meta.env.VITE_BACKEND_HOST+"/login", {
+            let response = await fetch(import.meta.env.VITE_BACKEND_HOST+"/user/login", {
                 method: "POST",
                 headers: {"content-type": "application/json"},
                 body: JSON.stringify(data),

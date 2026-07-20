@@ -31,7 +31,7 @@ const Profile = ({setLoggedinStatus}) => {
   async function fetchProfile() {
     try {
 
-      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/profile", {credentials:"include"})
+      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/user/profile", {credentials:"include"})
         
 
       if (!response.ok) return toast.error("Could not fetch profile!");

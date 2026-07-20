@@ -10,7 +10,7 @@ const Wishlist = () => {
     
   async function addToWishlist(productId, quantity){
     try {
-      let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/wishlist`,{
+      let response = await fetch(`${import.meta.env.VITE_BACKEND_HOST}/userItems/wishlist`,{
         method:"POST",
         credentials:"include",
         headers:{"content-type":"application/json"},
@@ -71,7 +71,7 @@ const Wishlist = () => {
 
   async function fetchWishlist(){
     try {
-      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/wishlist", {credentials: "include"});
+      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/userItems/wishlist", {credentials: "include"});
       if(!response.ok)
         return toast("Could not fetch your wishlist!!", {position: "boottom-center"});
 

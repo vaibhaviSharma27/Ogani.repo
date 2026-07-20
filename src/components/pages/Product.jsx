@@ -56,7 +56,7 @@ const ProductDetails = () => {
 
   async function fetchProduct(productId) {
     try {
-      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/product/" + productId);
+      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/shop/product/" + productId);
       if (!response.ok)
         return toast.error("Could not fetch product!");
 

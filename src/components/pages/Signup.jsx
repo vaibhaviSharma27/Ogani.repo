@@ -12,7 +12,7 @@ const Signup = () => {
             // console.log(import.meta.env.VITE_BACKEND_HOST+"/signup")
             // return;
 
-            const response = await fetch(import.meta.env.VITE_BACKEND_HOST+"/signup", {
+            const response = await fetch(import.meta.env.VITE_BACKEND_HOST+"/user/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

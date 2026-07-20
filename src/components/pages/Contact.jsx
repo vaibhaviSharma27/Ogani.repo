@@ -15,7 +15,7 @@ const Contact = () => {
 
   async function queryHandler(data) {
     try {
-      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/contact", {
+      let response = await fetch(import.meta.env.VITE_BACKEND_HOST + "/contact/contact", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(data)

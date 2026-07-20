@@ -57,7 +57,7 @@ export default function App() {
         (
             async () => {
                 try{
-                    let response = await fetch (`${import.meta.env.VITE_BACKEND_HOST}/profile`, {credentials:"include"});
+                    let response = await fetch (`${import.meta.env.VITE_BACKEND_HOST}/user/profile`, {credentials:"include"});
                     if(!response.ok)
                         throw new Error("User not logged in!!");
                     
